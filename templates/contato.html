@@ -1,0 +1,109 @@
+
+{% extends "base.html" %}
+
+{% block title %}Contato - Francisco Gabriel{% endblock %}
+
+{% block content %}
+<section class="section contact-section">
+  <div class="container">
+    <h1 class="section-title">Entre em Contato</h1>
+    <p class="section-subtitle">
+      Estou aberto a novas oportunidades, projetos interessantes e conversas sobre tecnologia.<br>
+      Respondo em até 24–48 horas.
+    </p>
+
+    <div class="contact-grid">
+      <!-- Lado esquerdo: Formulário -->
+      <div class="contact-form-container">
+        <form action="#" method="POST" class="contact-form" id="contact-form">
+          <div class="form-group">
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Seu nome" 
+              required 
+              autocomplete="name"
+            >
+          </div>
+
+          <div class="form-group">
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="Seu e-mail" 
+              required 
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="form-group">
+            <textarea 
+              name="message" 
+              rows="6" 
+              placeholder="Sua mensagem... (pode falar sobre o que quiser 😄)" 
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn primary full-width">
+            Enviar Mensagem
+            <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
+          </button>
+        </form>
+
+        <!-- Mensagem de sucesso/erro (mostrada via JS) -->
+        <div id="form-message" class="form-message hidden"></div>
+      </div>
+
+      <!-- Lado direito: Informações rápidas -->
+      <div class="contact-info-container">
+        <div class="contact-info">
+          <h3>Outras formas de contato</h3>
+
+          <ul class="contact-list">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>E-mail</strong>
+                <a href="mailto:franciscogabriellopessoares4@gmail.com">franciscogabriellopessoares4@gmail.com</a>
+              </div>
+            </li>
+
+            <li>
+              <i class="fab fa-linkedin-in"></i>
+              <div>
+                <strong>LinkedIn</strong>
+                <a href="https://linkedin.com/in/" target="_blank">
+                  linkedin.com/in/franciscogabriel-dev
+                </a>
+              </div>
+            </li>
+
+            <li>
+              <i class="fab fa-github"></i>
+              <div>
+                <strong>GitHub</strong>
+                <a href="https://github.com/FranciscoGabrielLS" target="_blank">
+                  github.com/seuusuario
+                </a>
+              </div>
+            </li>
+
+            <!-- <li>
+              <i class="fab fa-whatsapp"></i>
+              <div>
+                <strong>WhatsApp</strong>
+                <a href="https://wa.me/55SEUNUMERO" target="_blank">+55 (XX) 9XXXX-XXXX</a>
+              </div>
+            </li> -->
+          </ul>
+
+          <p class="availability">
+            <strong>Disponibilidade:</strong> Horário comercial (9h–18h) ou por mensagem assíncrona.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

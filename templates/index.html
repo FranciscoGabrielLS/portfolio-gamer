@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Francisco Gabriel | Portfólio</title>
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --bg: linear-gradient(135deg, #1a0f2e 0%, #0d1a2e 100%);
+      --card: rgba(20,20,40,0.7);
+      --border: rgba(100,80,255,0.2);
+      --accent: #7b5eff;
+      --accent-dark: #5a3fd1;
+      --text: #e0e0ff;
+      --text2: #b0b0e0;
+      --glow: rgba(123,94,255,0.45);
+      --transition: all 0.35s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1.5rem 5%;
+      background: rgba(10,5,25,0.5);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(100,80,255,0.15);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #c4b5fd, #a78bfa, #7b5eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav a {
+      color: var(--text2);
+      text-decoration: none;
+      margin: 0 1.3rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav a:hover, nav a.active { color: white; text-shadow: 0 0 12px var(--glow); }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 5% 8rem;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 7vw, 5.8rem);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #c4b5fd, #a78bfa, #7b5eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:translateY(0); } }
+    .fade-in { opacity:0; animation: fadeUp 1s ease-out forwards; }
+
+    @keyframes slideIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    .hero { text-align:center; margin-bottom:8rem; }
+    .hero p { font-size:1.35rem; color:var(--text2); max-width:720px; margin:1.5rem auto; }
+
+    .btn {
+      display:inline-block;
+      background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+      color:white;
+      padding:1rem 2.5rem;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:600;
+      transition:var(--transition);
+    }
+    .btn:hover { transform:translateY(-4px); box-shadow:0 12px 30px var(--glow); }
+
+    .sobre, .contato-section, .projetos-section {
+      background:rgba(25,20,55,0.4);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:3.5rem 2.5rem;
+      backdrop-filter:blur(10px);
+      box-shadow:0 15px 50px rgba(0,0,0,0.45);
+      margin:0 0 6rem;
+    }
+
+    .tabs {
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+      margin:2.5rem 0 3rem;
+      flex-wrap:wrap;
+    }
+
+    .tab {
+      background:none;
+      border:none;
+      padding:1rem 2.4rem;
+      font-size:1.15rem;
+      font-weight:600;
+      color:var(--text2);
+      cursor:pointer;
+      position:relative;
+      transition:var(--transition);
+      border-radius:12px 12px 0 0;
+    }
+
+    .tab:hover { color:white; background:rgba(123,94,255,0.12); }
+
+    .tab.active { color:white; background:rgba(123,94,255,0.22); }
+
+    .tab.active::after {
+      content:'';
+      position:absolute;
+      bottom:-4px; left:0; right:0;
+      height:4px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+      border-radius:4px;
+      box-shadow:0 4px 15px var(--glow);
+    }
+
+    .tab-content > div { display:none; opacity:0; transform:translateY(30px); transition:all 0.6s ease; }
+    .tab-content > div.active { display:block; opacity:1; transform:translateY(0); animation: slideIn 0.5s ease forwards; }
+
+    .sobre-texto, .projeto-texto {
+      font-size:1.15rem;
+      line-height:1.8;
+      color:var(--text2);
+      max-width:800px;
+      margin:0 auto 2rem;
+      text-align:center;
+    }
+
+    .projeto-img {
+      display:block;
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      border:2px solid rgba(123,94,255,0.3);
+      box-shadow:0 8px 25px rgba(0,0,0,0.4);
+      margin:2rem auto;
+      transition:var(--transition);
+    }
+
+    .projeto-img:hover {
+      transform:scale(1.03);
+      box-shadow:0 12px 35px var(--glow);
+    }
+
+    .destaque {
+      font-style:italic;
+      color:#d1c4ff;
+      font-size:1.25rem;
+      margin:2.5rem 0;
+      padding-left:1.5rem;
+      border-left:5px solid var(--accent);
+      text-align:left;
+      max-width:680px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .skills-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(340px,1fr));
+      gap:2rem;
+      margin-top:2rem;
+    }
+
+    .skill {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:2rem 1.8rem;
+      transition:var(--transition);
+    }
+
+    .skill:hover {
+      transform:translateY(-10px);
+      border-color:rgba(123,94,255,0.5);
+      box-shadow:0 20px 50px rgba(0,0,0,0.45), 0 0 35px var(--glow);
+    }
+
+    .skill h3 { font-size:1.5rem; margin-bottom:1.4rem; color:#d1c4ff; }
+
+    .skill ul { list-style:none; }
+
+    .skill li { margin:1rem 0; padding-left:1.6rem; position:relative; color:var(--text2); font-size:1.05rem; }
+
+    .skill li::before { content:"→"; color:var(--accent); position:absolute; left:0; font-weight:bold; }
+
+    /* Formulário de email */
+    form {
+      max-width:600px;
+      margin:2rem auto;
+      display:flex;
+      flex-direction:column;
+      gap:1.2rem;
+    }
+
+    input, textarea {
+      padding:1rem;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:rgba(30,25,60,0.6);
+      color:var(--text);
+      font-size:1.05rem;
+    }
+
+    input:focus, textarea:focus {
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(123,94,255,0.3);
+    }
+
+    button[type="submit"] {
+      background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+      color:white;
+      border:none;
+      padding:1rem;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      transition:var(--transition);
+    }
+
+    button[type="submit"]:hover { transform:translateY(-3px); box-shadow:0 10px 25px var(--glow); }
+
+    /* Redes sociais */
+    .social-buttons {
+      display:flex;
+      justify-content:center;
+      gap:2.5rem;
+      flex-wrap:wrap;
+      margin:3rem 0;
+    }
+
+    .social-btn {
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      background:rgba(123,94,255,0.15);
+      color:white;
+      padding:1.2rem 2.5rem;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:500;
+      font-size:1.1rem;
+      transition:var(--transition);
+      border:1px solid rgba(123,94,255,0.3);
+    }
+
+    .social-btn:hover {
+      background:rgba(123,94,255,0.35);
+      transform:translateY(-5px);
+      box-shadow:0 12px 30px var(--glow);
+    }
+
+    .social-btn i {
+      font-size:2rem;
+      transition:var(--transition);
+    }
+
+    .social-btn:hover i {
+      transform:scale(1.2) rotate(5deg);
+    }
+
+    @media (max-width:768px) {
+      main { padding:4rem 6%; }
+      .tabs { flex-direction:column; gap:1rem; }
+      .tab { width:100%; border-radius:12px; }
+      .skills-grid, .social-buttons { grid-template-columns:1fr; }
+      nav { justify-content:center; gap:1.2rem; }
+      nav a { margin:0.5rem 1.2rem; }
+      .social-btn { padding:1rem 1.8rem; font-size:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">Francisco Gabriel</div>
+      <div>
+        <a href="#inicio" class="active">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="inicio" class="hero fade-in">
+      <h1>Francisco Gabriel</h1>
+      <p>Desenvolvedor focado em jogos 2D, interatividade e experiências fluidas.<br>Lógica + Design + Código = Projetos que engajam.</p>
+      <a href="#projetos" class="btn">Ver Projetos</a>
+    </section>
+
+    <section id="sobre" class="sobre fade-in" style="animation-delay:0.3s;">
+      <h1>Sobre mim</h1>
+      <div class="tabs">
+        <button class="tab active" data-tab="sobre">Sobre mim</button>
+        <button class="tab" data-tab="habilidades">Habilidades</button>
+      </div>
+      <div class="tab-content">
+        <div id="sobre" class="active">
+          <div class="sobre-texto">
+            <p>Oi! Sou Francisco, desenvolvedor que começou criando jogos 2D e hoje aplica essa mesma paixão por lógica, feedback imediato e experiência do usuário no desenvolvimento web e interativo.</p>
+            <p>Gosto de projetos com regras claras, interações fluidas e resultados visíveis — desde protótipos rápidos até sistemas mais estruturados com front-end moderno e back-end leve.</p>
+            <p class="destaque">“O código mais bonito é aquele que faz o outro lado da tela sorrir sem nem perceber o esforço.”</p>
+          </div>
+        </div>
+        <div id="habilidades">
+          <div class="skills-grid">
+            <div class="skill fade-in" style="animation-delay:0.4s;">
+              <h3>Jogos 2D</h3>
+              <ul>
+                <li>Lógica de jogo, estados e transições</li>
+                <li>Colisões, física simples e controle</li>
+                <li>Inimigos, padrões e IA básica</li>
+                <li>Feedback visual, pontuação e progressão</li>
+              </ul>
+            </div>
+            <div class="skill fade-in" style="animation-delay:0.6s;">
+              <h3>Front-end</h3>
+              <ul>
+                <li>HTML5 + CSS3 (Flex, Grid, animações)</li>
+                <li>JavaScript moderno e interatividade</li>
+                <li>Design responsivo e mobile-first</li>
+                <li>Foco em UX e micro-interações</li>
+              </ul>
+            </div>
+            <div class="skill fade-in" style="animation-delay:0.8s;">
+              <h3>Back-end & Ferramentas</h3>
+              <ul>
+                <li>Python + Flask (APIs REST)</li>
+                <li>Git, organização e boas práticas</li>
+                <li>Prototipagem rápida</li>
+                <li>Estruturação de projetos escaláveis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projetos com imagens -->
+    <section id="projetos" class="projetos-section fade-in" style="animation-delay:0.5s; margin:6rem 0;">
+      <h1>Projetos</h1>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="senac-roblox">Espaço Interativo SENAC no Roblox</button>
+        <button class="tab" data-tab="dino-plataforma">Jogo de Plataforma: Dino Estilo Chrome</button>
+      </div>
+
+      <div class="tab-content">
+        <div id="senac-roblox" class="active">
+          <div class="projeto-texto">
+            <p>Este projeto envolveu a criação de um espaço interativo no Roblox para o SENAC, com foco em educação e engajamento. Desenvolvi ambientes virtuais onde alunos podem explorar cursos, participar de mini-jogos educativos e interagir com professores em tempo real.</p>
+            <p>Usei Roblox Studio para modelagem 3D, scripts Lua para lógica de interação, colisões e eventos multiplayer. O espaço inclui salas de aula virtuais, desafios gamificados e integração com chat para feedback imediato.</p>
+            <p>Resultado: Um hub educacional divertido que aumenta o interesse dos alunos jovens.</p>
+          </div>
+          <img src="https://mondocontractflooring.com/wp-content/uploads/2024/03/University-Library-Leiden_Netherlands-1-min.jpg" alt="Espaço Interativo SENAC no Roblox - Vista do ambiente virtual" class="projeto-img">
+          <!-- Substitua o src pela sua imagem real: ex src="https://seusite.com/imagens/senac-roblox-screenshot.png" -->
+        </div>
+
+        <div id="dino-plataforma">
+          <div class="projeto-texto">
+            <p>Inspirado no jogo offline do Chrome, criei um jogo de plataforma 2D com um dinossauro como protagonista. O jogador pula obstáculos, coleta itens e avança em níveis infinitos com dificuldade crescente.</p>
+            <p>Desenvolvido em Unity/Godot, com física simples, animações sprite e sistema de highscore. Incluí power-ups, inimigos variados e modo endless para replayability.</p>
+            <p>Desafios superados: Otimização para mobile, balanço de dificuldade e feedback visual suave.</p>
+          </div>
+          <img src="https://cdn.mos.cms.futurecdn.net/v2/t:0,l:0,cw:1082,ch:608,q:80,w:1082/3q2rJvGWV5W4AzF7ydhEj4.jpg" alt="Jogo de Plataforma Dino estilo Chrome Offline - Screenshot do T-Rex pulando" class="projeto-img">
+          <!-- Substitua o src pela sua imagem real: ex src="https://seusite.com/imagens/dino-game-screenshot.png" -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contato-section fade-in" style="animation-delay:0.7s;">
+      <h1>Contato</h1>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="email">Enviar Email</button>
+        <button class="tab" data-tab="redes">Redes Sociais</button>
+      </div>
+
+      <div class="tab-content">
+        <div id="email" class="active">
+          <form action="https://formspree.io/f/SEU_ID_AQUI" method="POST">
+            <input type="text" name="nome" placeholder="Seu nome" required>
+            <input type="email" name="email" placeholder="Seu email" required>
+            <textarea name="mensagem" rows="6" placeholder="Sua mensagem..." required></textarea>
+            <button type="submit">Enviar Mensagem</button>
+          </form>
+          <p style="text-align:center; margin-top:1.5rem; color:var(--text2);">
+            (Envia direto pro seu email – sem backend necessário!)
+          </p>
+        </div>
+
+        <div id="redes">
+          <div class="social-buttons">
+            <a href="https://www.linkedin.com/in/SEU_PERFIL_AQUI" target="_blank" class="social-btn">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
+            <a href="https://github.com/SEU_USUARIO_AQUI" target="_blank" class="social-btn">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+          <p style="text-align:center; margin-top:2rem; color:var(--text2);">
+            Me siga ou conecte para ver mais projetos e colaborações!
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabsContainer = btn.closest('.tabs');
+        const contentContainer = tabsContainer.nextElementSibling;
+
+        tabsContainer.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        contentContainer.querySelectorAll('div[id]').forEach(div => div.classList.remove('active'));
+
+        btn.classList.add('active');
+        contentContainer.querySelector(`#${btn.dataset.tab}`).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

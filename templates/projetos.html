@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Projetos - Francisco Gabriel{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="section-title">Projetos</h1>
+    <p class="section-subtitle">Alguns trabalhos que me orgulho de ter construído</p>
+
+    <div class="projects-grid" id="projects-grid"></div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const projects = [
+    {
+      title: "Jogo do Dino",
+      description: "Jogo de plataforma inspirado no do Chrome.",
+      tags: ["PYTHON."],
+      link: "#",
+      image: "22.png"
+    },
+    {
+      title: "Dashboard Financeiro Pessoal",
+      description: "App para controle de gastos com categorização automática e gráficos interativos.",
+      tags: ["React", "TypeScript", "Flask", "Chart.js", "Supabase"],
+      link: "#",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff335f?w=800"
+    },
+
+    // adicione mais projetos aqui...
+  ];
+
+  const grid = document.getElementById("projects-grid");
+
+  // Shuffle + render
+  function renderProjects() {
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    grid.innerHTML = "";
+    shuffled.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+      card.innerHTML = `
+        <div class="project-img">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+        </div>
+        <div class="project-info">
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="tags">
+            ${p.tags.map(tag => `<span>${tag}</span>`).join("")}
+          </div>
+          <a href="${p.link}" target="_blank" class="project-link">Ver projeto <i class="fas fa-arrow-right"></i></a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  window.addEventListener("load", renderProjects);
+</script>
+{% endblock %}
